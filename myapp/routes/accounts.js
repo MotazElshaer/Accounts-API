@@ -25,7 +25,6 @@ router.post('/newAccount', function(req, res, next) {
 	var query = Account.where({Email : req.body.Email}); 
 	query.findOne(function (err , account) {
 		if(err) next(err); 
-		console.log(account);
 		if(account == null){
 			Account.create(req.body, function (err, post) {
 				if (err) return next(err);
@@ -61,7 +60,6 @@ router.put('/changeStatus/:id', function (req, res, next) {
 	Account.findById(req.params.id, function (err , account) {
 		if(err) return next(err); 
 		account.Status = req.body.Status; 
-		console.log(account);
 		account.save(function (err, newAccount) {
 			res.json(newAccount);
 		})
